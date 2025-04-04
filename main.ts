@@ -60,7 +60,7 @@ async function processVideo(videoId: string): Promise<void> {
     console.log('Successfully generated summary.');
 
     // 3. Save the results (Transcript JSON, Transcript TXT, Summary MD)
-    const baseFilename = sanitizeFilename(transcriptResponse.title || videoId);
+    const baseFilename = sanitizeFilename(transcriptResponse.title || videoId).replace(/ /g, "-");
     const jsonOutputPath = path.join(OUTPUT_DIR, `${baseFilename}.json`);
     const textOutputPath = path.join(OUTPUT_DIR, `${baseFilename}.txt`);
     const summaryOutputPath = path.join(OUTPUT_DIR, `${baseFilename}-summary.md`);
@@ -95,6 +95,7 @@ const exampleVideoId = 'h5J3YOnBiZ8'; // Example: ITPM flash
 // const exampleVideoId = 'invalid-id'; // Example: Invalid ID
 // const exampleVideoId = 'J---aiyznGQ'; // Example: Video with potentially no transcript
 
+// Immediately invoked main async function
 (async () => {
     // Check for API Key first
     if (!process.env.ANTHROPIC_API_KEY) {
@@ -110,4 +111,4 @@ const exampleVideoId = 'h5J3YOnBiZ8'; // Example: ITPM flash
         console.error('\nUnhandled error in main process:', error);
         process.exit(1); // Exit with error code on failure
     }
-})(); // Immediately invoke the async function
+})(); 
