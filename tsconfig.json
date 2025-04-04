@@ -10,7 +10,7 @@
       "forceConsistentCasingInFileNames": true 
     },
     "include": [
-      "getTranscriptFromURL.ts" 
+      "getTranscriptFromId.ts" 
     ],
     "exclude": [
       "node_modules"

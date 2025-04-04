@@ -1,5 +1,3 @@
-import * as fs from 'fs/promises';
-import * as path from 'path';
 import Anthropic from '@anthropic-ai/sdk';
 import * as dotenv from 'dotenv';
 
@@ -10,70 +8,46 @@ const anthropic = new Anthropic({
 });
 
 /**
- * Reads text from a file, sends it to the Anthropic API for summarization,
- * and saves the summary to a new Markdown file.
+ * Sends text to the Anthropic API for summarisation.
  *
- * @param transcriptFilePath The absolute path to the transcript text file.
- * @param baseFileName A base name (like video ID or title) for the output summary file.
+ * @param transcriptText The transcript text to summarise.
+ * @returns The summary text as a string, or null if an error occurs.
  */
-async function createSummary(transcriptFilePath: string, baseFileName: string): Promise<void> {
-  console.log(`Reading transcript from: ${transcriptFilePath}`);
+export async function createSummary(transcriptText: string): Promise<string | null> {
+  console.log(`Received transcript text. Length: ${transcriptText.length} characters.`);
   try {
-    // 1. Read the transcript file
-    const transcriptText = await fs.readFile(transcriptFilePath, 'utf-8');
-    console.log(`Successfully read transcript. Length: ${transcriptText.length} characters.`);
-
     if (!transcriptText.trim()) {
-      console.error('Error: Transcript file is empty or contains only whitespace.');
-      return;
+      console.error('Error: Transcript text is empty or contains only whitespace.');
+      return null;
     }
 
-    // 2. Send text to Anthropic API for summarization
     console.log(`Sending transcript to Anthropic API (model: claude-3-5-haiku-20241022)...`);
     const msg = await anthropic.messages.create({
       model: 'claude-3-5-haiku-20241022',
-      max_tokens: 1024, // Adjust max_tokens as needed
+      max_tokens: 1024,
       messages: [
         {
           role: 'user',
-          content: `Please summarize the following video transcript concisely. Don't add any introductory text like "Here's a concise summary:" just return the summary in markdown format.
-
-${transcriptText}`,
+          content: `Please summarise the following video transcript concisely. Don't add any introductory text like "Here's a concise summary:" just return the summary in markdown format.\n\n${transcriptText}`,
         },
       ],
     });
 
     console.log('Received summary from Anthropic API.');
 
-    // Extract the summary text - Assuming the response structure
-    // Check the actual structure of msg.content if this doesn't work
-    let summaryText = '';
+    let summaryText: string | null = null;
     if (Array.isArray(msg.content) && msg.content.length > 0 && msg.content[0].type === 'text') {
         summaryText = msg.content[0].text;
     } else {
         console.error('Error: Unexpected response format from Anthropic API.');
         console.error('API Response:', JSON.stringify(msg, null, 2));
-        return;
+        return null;
     }
 
-
-    // 3. Generate filename and save the summary
-    const outputFileName = `${baseFileName}-summary.md`;
-    const outputDirectory = path.dirname(transcriptFilePath); // Save in the same directory as the transcript
-    const outputFilePath = path.join(outputDirectory, outputFileName);
-
-    console.log(`Saving summary to: ${outputFilePath}`);
-    await fs.writeFile(outputFilePath, summaryText, 'utf-8');
-    console.log('Summary saved successfully!');
+    return summaryText;
 
   } catch (error) {
-    console.error('An error occurred:', error);
+    console.error('An error occurred during summarisation:', error);
+    return null;
   }
 }
-
-const transcriptPath = path.resolve(__dirname, 'transcripts', 'Interview with Vibe Coder in 2025.txt'); 
-const videoIdentifier = 'JeNS1ZNHQs8'; 
-
-createSummary(transcriptPath, videoIdentifier)
-  .then(() => console.log('Summary creation process finished.'))
-  .catch(err => console.error('Summary creation failed:', err));
