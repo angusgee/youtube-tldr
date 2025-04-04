@@ -36,7 +36,7 @@ async function createSummary(transcriptFilePath: string, baseFileName: string): 
       messages: [
         {
           role: 'user',
-          content: `Please summarize the following video transcript concisely:
+          content: `Please summarize the following video transcript concisely. Don't add any introductory text like "Here's a concise summary:" just return the summary in markdown format.
 
 ${transcriptText}`,
         },
