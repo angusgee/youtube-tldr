@@ -8,9 +8,9 @@ const anthropic = new Anthropic({
 });
 
 /**
- * Sends text to the Anthropic API for summarisation.
+ * Sends text to the Anthropic API for summarization.
  *
- * @param transcriptText The transcript text to summarise.
+ * @param transcriptText The transcript text to summarize.
  * @returns The summary text as a string, or null if an error occurs.
  */
 export async function createSummary(transcriptText: string): Promise<string | null> {
@@ -28,7 +28,7 @@ export async function createSummary(transcriptText: string): Promise<string | nu
       messages: [
         {
           role: 'user',
-          content: `Please summarise the following video transcript concisely. Don't add any introductory text like "Here's a concise summary:" just return the summary in markdown format.\n\n${transcriptText}`,
+          content: `Please summarize the following video transcript concisely. Don't add any introductory text like "Here's a concise summary:" just return the summary in markdown format.\n\n${transcriptText}`,
         },
       ],
     });
@@ -47,7 +47,7 @@ export async function createSummary(transcriptText: string): Promise<string | nu
     return summaryText;
 
   } catch (error) {
-    console.error('An error occurred during summarisation:', error);
+    console.error('An error occurred during summarization:', error);
     return null;
   }
 }
