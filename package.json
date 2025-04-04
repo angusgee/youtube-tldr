@@ -11,6 +11,8 @@
   "author": "AngusG",
   "license": "ISC",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "dotenv": "^16.4.7",
     "html-entities": "^2.5.2",
     "youtube-transcript": "^1.0.6",
     "ytdl-core": "^4.11.5"
