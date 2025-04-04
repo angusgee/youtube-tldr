@@ -2,7 +2,7 @@ import { YoutubeTranscript } from 'youtube-transcript';
 import * as fs from 'fs';
 import * as path from 'path';
 import { parseArgs } from 'util';
-import ytdl from 'ytdl-core'; 
+import { video_info } from 'play-dl'; 
 import { decode } from 'html-entities'; 
 
 interface TranscriptSegment {
@@ -75,12 +75,16 @@ async function main() {
     } else {
         try {
             console.log(`Attempting to fetch video info for ID: ${videoId} (URL: ${url})`);
-            const info = await ytdl.getInfo(url);
-            title = info.videoDetails.title;
+            const info = await video_info(url);
+            title = info.video_details.title;
             console.log(`Successfully fetched title: ${title}`);
-            baseFilename = sanitizeFilename(title); 
+            baseFilename = title ? sanitizeFilename(title) : videoId; 
         } catch (infoError: any) {
             console.warn(`Warning: Failed to fetch video title: ${infoError.message}. Using Video ID for filename.`);
+            
+            // Fallback to secondary method if available in the future
+            console.warn('Falling back to video ID for filename.');
+            baseFilename = videoId;
         }
 
         try {

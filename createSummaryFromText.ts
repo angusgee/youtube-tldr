@@ -71,8 +71,8 @@ ${transcriptText}`,
   }
 }
 
-const transcriptPath = path.resolve(__dirname, 'transcripts', 'LjbNtw14TwI.txt'); 
-const videoIdentifier = 'LjbNtw14TwI'; 
+const transcriptPath = path.resolve(__dirname, 'transcripts', 'Interview with Vibe Coder in 2025.txt'); 
+const videoIdentifier = 'JeNS1ZNHQs8'; 
 
 createSummary(transcriptPath, videoIdentifier)
   .then(() => console.log('Summary creation process finished.'))
