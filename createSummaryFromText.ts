@@ -58,8 +58,7 @@ ${transcriptText}`,
 
 
     // 3. Generate filename and save the summary
-    const date = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-    const outputFileName = `${date}_${baseFileName}_summary.md`;
+    const outputFileName = `${baseFileName}-summary.md`;
     const outputDirectory = path.dirname(transcriptFilePath); // Save in the same directory as the transcript
     const outputFilePath = path.join(outputDirectory, outputFileName);
 
@@ -72,8 +71,8 @@ ${transcriptText}`,
   }
 }
 
-const transcriptPath = path.resolve(__dirname, 'transcripts', '2025-04-04_LjbNtw14TwI_title_fetch_failed-text.txt'); 
-const videoIdentifier = 'LjbNtw14TwI_title'; 
+const transcriptPath = path.resolve(__dirname, 'transcripts', 'LjbNtw14TwI.txt'); 
+const videoIdentifier = 'LjbNtw14TwI'; 
 
 createSummary(transcriptPath, videoIdentifier)
   .then(() => console.log('Summary creation process finished.'))
