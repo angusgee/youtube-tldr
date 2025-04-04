@@ -6,7 +6,7 @@
       <main>
         <div class="container">
           <div v-if="isLoggedIn">
-            <!-- Main app content goes here -->
+            <!-- Main app content -->
             <div class="form-container">
               <h2>Generate Summary</h2>
               <input 

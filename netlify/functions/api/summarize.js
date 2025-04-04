@@ -1,5 +1,5 @@
-const { fetchTranscriptData } = require('../../../getTranscriptFromId');
-const { createSummary } = require('../../../createSummaryFromText');
+const { fetchTranscriptData } = require('../lib/youtube/getTranscript');
+const { createSummary } = require('../lib/summarization/createSummary');
 
 exports.handler = async (event) => {
   // Only accept POST requests
@@ -20,7 +20,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // Process the video (using your existing code)
+    // Process the video
     const transcriptResponse = await fetchTranscriptData(videoId);
     
     if (transcriptResponse.error) {
