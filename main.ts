@@ -95,15 +95,19 @@ const exampleVideoId = 'h5J3YOnBiZ8'; // Example: ITPM flash
 // const exampleVideoId = 'invalid-id'; // Example: Invalid ID
 // const exampleVideoId = 'J---aiyznGQ'; // Example: Video with potentially no transcript
 
-if (!process.env.ANTHROPIC_API_KEY) {
-    console.error('Error: ANTHROPIC_API_KEY environment variable is not set.');
-    console.log('Please create a .env file in the root directory with ANTHROPIC_API_KEY=your_key');
-    process.exit(1);
-}
+(async () => {
+    // Check for API Key first
+    if (!process.env.ANTHROPIC_API_KEY) {
+        console.error('Error: ANTHROPIC_API_KEY environment variable is not set.');
+        console.log('Please create a .env file in the root directory with ANTHROPIC_API_KEY=your_key');
+        process.exit(1); // Exit early if no key
+    }
 
-processVideo(exampleVideoId)
-    .then(() => console.log('\nApplication finished.'))
-    .catch(error => {
+    try {
+        await processVideo(exampleVideoId);
+        console.log('\nApplication finished successfully.');
+    } catch (error) {
         console.error('\nUnhandled error in main process:', error);
-        process.exit(1);
-    });
+        process.exit(1); // Exit with error code on failure
+    }
+})(); // Immediately invoke the async function
