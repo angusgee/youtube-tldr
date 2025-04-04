@@ -1,0 +1,23 @@
+{
+  "name": "youtube-tldr",
+  "version": "1.0.0",
+  "description": "Fetches YouTube video transcripts",
+  "main": "dist/getTranscriptFromURL.js",
+  "scripts": {
+    "start": "ts-node getTranscriptFromURL.ts",
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "AngusG",
+  "license": "ISC",
+  "dependencies": {
+    "html-entities": "^2.5.2",
+    "youtube-transcript": "^1.0.6",
+    "ytdl-core": "^4.11.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
