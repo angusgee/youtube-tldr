@@ -2,3 +2,7 @@ node_modules/
 transcripts/
 outputs/
 .env
+project-structure.md
+prd.md
+# Local Netlify folder
+.netlify
