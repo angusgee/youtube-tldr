@@ -9,9 +9,6 @@
       "skipLibCheck": true, 
       "forceConsistentCasingInFileNames": true 
     },
-    "include": [
-      "getTranscriptFromId.ts" 
-    ],
     "exclude": [
       "node_modules"
     ]
