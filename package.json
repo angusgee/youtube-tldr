@@ -5,11 +5,12 @@
   "main": "dist/getTranscriptFromURL.js",
   "scripts": {
     "start": "ts-node getTranscriptFromURL.ts",
-    "build": "vite build",
+    "build": "npm run build:functions && vite build",
+    "build:functions": "tsc -p netlify/functions/tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "preview": "vite preview",
-    "netlify-dev": "netlify dev"
+    "netlify-dev": "npm run build:functions && netlify dev"
   },
   "author": "AngusG",
   "license": "ISC",

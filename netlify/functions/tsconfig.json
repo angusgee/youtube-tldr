@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ES2020", // Target modern Node.js versions supported by Netlify
+    "module": "CommonJS", // Netlify Functions use CommonJS
+    "outDir": "../../.netlify/functions-internal", // Output directory for compiled JS relative to this tsconfig
+    "rootDir": "./", // Source directory is the functions directory itself
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node", // Use Node.js module resolution
+    "lib": ["es2020"], // Include ES2020 library features
+    "types": ["node"] // Include Node.js type definitions
+  },
+  "include": ["**/*.ts"], // Include all .ts files within this directory and subdirectories
+  "exclude": ["node_modules", "../../node_modules"] // Exclude node_modules
+}
