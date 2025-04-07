@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node getTranscriptFromURL.ts",
     "build": "npm run build:functions && vite build",
-    "build:functions": "tsc -p netlify/functions/tsconfig.json",
+    "build:functions": "tsc -p netlify/functions/tsconfig.json --listEmittedFiles",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite",
     "preview": "vite preview",

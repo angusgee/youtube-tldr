@@ -90,7 +90,7 @@
             return;
           }
           
-          const response = await fetch("/.netlify/functions/api/summarize", {
+          const response = await fetch("/api/summarize", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
